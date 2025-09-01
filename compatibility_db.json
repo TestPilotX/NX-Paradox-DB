@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.1",
-  "last_updated": "2025-08-31T21:00:00Z",
+  "schema_version": "1.2",
+  "last_updated": "2025-08-31T21:10:00Z",
   "firmware_versions": {
     "18.1.0": {
       "requires_ams_version": "1.7.0",
@@ -20,7 +20,7 @@
         "0.10.0": {
           "max_fw_version": "17.0.1",
           "incompatible_with_ams": ["1.7.0"],
-          "notes": "Esta versión de MissionControl es inestable en firmwares superiores al 17.0.1."
+          "notes": "Tu versión de Mission Control podría no ser compatible con tu firmware actual, causando cuelgues o problemas con los mandos."
         }
       }
     }
@@ -41,7 +41,8 @@
     },
     "THEME_INCOMPATIBLE": {
       "description": "Tu versión de firmware es incompatible con temas personalizados, lo que puede causar fallos al arrancar. La solución es eliminar la carpeta de temas.",
-      "action": "DELETE_THEME_FOLDER"
+      "action": "DELETE_FOLDER",
+      "context_id": "theme_folder_path"
     },
     "SIGPATCHES_MISSING": {
       "description": "Usa el módulo 'Actualización del sistema' de NX Paradox para reinstalar el pack de CFW más reciente. Esto restaurará los parches correctos y necesarios."
@@ -56,7 +57,8 @@
       "description": "Actualiza Hekate a la última versión para asegurar total compatibilidad y acceso a las nuevas funciones de Atmosphère. Puedes hacerlo desde el módulo 'Actualización del sistema'."
     },
     "MC_FW_INCOMPATIBLE": {
-      "description": "Tu versión de Mission Control puede ser inestable. Visita la 'Biblioteca Homebrew' de NX Paradox y busca la última versión para actualizarla."
+      "description": "Tu versión de Mission Control es incompatible y puede causar errores. La solución recomendada para asegurar la estabilidad es eliminarla.",
+      "action": "DELETE_FOLDER"
     }
   }
 }
