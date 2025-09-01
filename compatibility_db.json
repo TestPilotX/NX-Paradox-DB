@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2025-08-31T19:10:00Z",
+  "firmware_versions": {
+    "18.1.0": {
+      "requires_ams_version": "1.7.0",
+      "theme_compatible": false,
+      "notes": "Los temas personalizados causan un error de arranque en esta versión. Deben ser desactivados."
+    },
+    "17.0.1": {
+      "requires_ams_version": "1.6.2",
+      "theme_compatible": true,
+      "notes": ""
+    }
+  },
+  "homebrew_conflicts": {
+    "MissionControl": {
+      "identifier": "/atmosphere/contents/0100000000001013",
+      "versions": {
+        "0.10.0": {
+          "max_fw_version": "17.0.1",
+          "incompatible_with_ams": ["1.7.0"],
+          "notes": "Esta versión de MissionControl es inestable en firmwares superiores al 17.0.1."
+        }
+      }
+    }
+  },
+  "hekate_compatibility": {
+    "6.2.1": {
+      "recommended_for_ams": ["1.7.0", "1.7.1"],
+      "notes": ""
+    },
+    "6.1.0": {
+      "recommended_for_ams": ["1.6.0", "1.6.1", "1.6.2"],
+      "notes": "No se recomienda usar esta versión de Hekate con Atmosphère 1.7.0 o superior."
+    }
+  }
+}
