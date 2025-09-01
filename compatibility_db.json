@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "last_updated": "2025-08-31T19:10:00Z",
+  "schema_version": "1.1",
+  "last_updated": "2025-08-31T21:00:00Z",
   "firmware_versions": {
     "18.1.0": {
       "requires_ams_version": "1.7.0",
@@ -33,6 +33,30 @@
     "6.1.0": {
       "recommended_for_ams": ["1.6.0", "1.6.1", "1.6.2"],
       "notes": "No se recomienda usar esta versión de Hekate con Atmosphère 1.7.0 o superior."
+    }
+  },
+  "problem_solutions": {
+    "EXFAT_DETECTED": {
+      "description": "Se recomienda respaldar los datos importantes de tu Micro SD y formatearla usando el sistema de archivos FAT32 para máxima estabilidad y prevenir corrupción de datos."
+    },
+    "THEME_INCOMPATIBLE": {
+      "description": "Tu versión de firmware es incompatible con temas personalizados, lo que puede causar fallos al arrancar. La solución es eliminar la carpeta de temas.",
+      "action": "DELETE_THEME_FOLDER"
+    },
+    "SIGPATCHES_MISSING": {
+      "description": "Usa el módulo 'Actualización del sistema' de NX Paradox para reinstalar el pack de CFW más reciente. Esto restaurará los parches correctos y necesarios."
+    },
+    "BROKEN_PATH_INI": {
+      "description": "Edita manualmente el archivo 'bootloader/hekate_ipl.ini' en tu Micro SD y corrige o elimina la línea que apunta al archivo que ya no existe."
+    },
+    "CORRUPT_INI_FILE": {
+      "description": "Tu archivo de configuración de Hekate está dañado. Reemplaza 'bootloader/hekate_ipl.ini' con una copia nueva o de una copia de seguridad."
+    },
+    "HEKATE_AMS_MISMATCH": {
+      "description": "Actualiza Hekate a la última versión para asegurar total compatibilidad y acceso a las nuevas funciones de Atmosphère. Puedes hacerlo desde el módulo 'Actualización del sistema'."
+    },
+    "MC_FW_INCOMPATIBLE": {
+      "description": "Tu versión de Mission Control puede ser inestable. Visita la 'Biblioteca Homebrew' de NX Paradox y busca la última versión para actualizarla."
     }
   }
 }
