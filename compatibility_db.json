@@ -1,6 +1,6 @@
 {
-  "schema_version": "2.0",
-  "last_updated": "2025-09-01T10:00:00Z",
+  "schema_version": "2.1",
+  "last_updated": "2025-09-02T23:30:00Z",
   "problem_solutions": {
     "EXFAT_DETECTED": {
       "level": "WARNING",
@@ -17,9 +17,7 @@
       "solution": {
         "description": "La estructura de tu SD está incompleta. La mejor solución es realizar una instalación limpia usando el módulo 'Actualización del sistema' de NX Paradox.",
         "action": "GUIDED_INSTALL",
-        "context": {
-          "target_module": "CFW_UPDATER"
-        }
+        "context": { "target_module": "CFW_UPDATER" }
       }
     },
     "ARCHIVE_BIT_SET": {
@@ -42,39 +40,22 @@
     },
     "SIGPATCHES_MISSING": {
       "level": "CRITICAL",
-      "title": "Sigpatches no encontrados o corruptos",
-      "description": "Faltan los parches necesarios para tu CFW. Tus juegos y aplicaciones no oficiales no se iniciarán.",
+      "title": "Sigpatches no encontrados o mal configurados",
+      "description": "Tu sistema no está configurado para cargar los parches necesarios. Tus juegos y aplicaciones no oficiales no se iniciarán.",
       "solution": {
-        "description": "Vamos a descargar y reemplazar únicamente los archivos de parches que faltan, sin necesidad de descargar un pack de CFW completo.",
-        "action": "REPLACE_FILES",
-        "context": {
-          "url": "https://github.com/TestPilotX/NX-Paradox-Packs/releases/download/Patches-v1/Sigpatches-1.7.0_FW-18.1.0.zip"
-        }
-      }
-    },
-    "BROKEN_PATH_INI": {
-      "level": "WARNING",
-      "title": "Ruta rota en tu configuración de arranque",
-      "description": "Tu archivo 'hekate_ipl.ini' apunta a un payload o archivo de configuración que no existe. Seleccionar esa opción en Hekate causará un error.",
-      "solution": {
-        "description": "Puedes reinstalar tu CFW con nuestro pack verificado para generar un hekate_ipl.ini limpio, o editarlo manualmente para corregir la ruta incorrecta.",
+        "description": "La forma más segura de restaurar los parches y asegurar la compatibilidad total es reinstalando el pack de CFW completo desde el módulo de 'Actualización del sistema'.",
         "action": "GUIDED_INSTALL",
-        "context": {
-          "target_module": "CFW_UPDATER"
-        }
+        "context": { "target_module": "CFW_UPDATER" }
       }
     },
     "GENERIC_CRASH_2168_0002": {
       "level": "CRITICAL",
       "title": "Crash detectado (Error 2168-0002)",
-      "description": "Se encontró un reporte de error del sistema. Este código de error casi siempre significa que un homebrew o módulo del sistema es incompatible con tu versión de Firmware/Atmosphère.",
+      "description": "Se encontró un reporte de error del sistema. Este código casi siempre significa que un homebrew o módulo es incompatible con tu versión de Firmware/Atmosphère.",
       "solution": {
-        "description": "La causa más común de este error es una desincronización entre versiones. La solución más segura y recomendada es actualizar tu CFW completo con nuestro último pack verificado para asegurar que todos los componentes sean 100% compatibles.",
+        "description": "La solución más segura es actualizar tu CFW completo con nuestro último pack verificado para asegurar que todos los componentes sean 100% compatibles.",
         "action": "GUIDED_INSTALL",
-        "context": {
-          "target_module": "CFW_UPDATER",
-          "message": "La mejor solución es actualizar tu CFW con nuestro pack verificado. Te llevaremos al módulo de Actualización con la opción correcta ya seleccionada."
-        }
+        "context": { "target_module": "CFW_UPDATER" }
       }
     }
   }
