@@ -1,64 +1,81 @@
 {
-  "schema_version": "1.2",
-  "last_updated": "2025-08-31T21:10:00Z",
-  "firmware_versions": {
-    "18.1.0": {
-      "requires_ams_version": "1.7.0",
-      "theme_compatible": false,
-      "notes": "Los temas personalizados causan un error de arranque en esta versión. Deben ser desactivados."
-    },
-    "17.0.1": {
-      "requires_ams_version": "1.6.2",
-      "theme_compatible": true,
-      "notes": ""
-    }
-  },
-  "homebrew_conflicts": {
-    "MissionControl": {
-      "identifier": "/atmosphere/contents/0100000000001013",
-      "versions": {
-        "0.10.0": {
-          "max_fw_version": "17.0.1",
-          "incompatible_with_ams": ["1.7.0"],
-          "notes": "Tu versión de Mission Control podría no ser compatible con tu firmware actual, causando cuelgues o problemas con los mandos."
-        }
-      }
-    }
-  },
-  "hekate_compatibility": {
-    "6.2.1": {
-      "recommended_for_ams": ["1.7.0", "1.7.1"],
-      "notes": ""
-    },
-    "6.1.0": {
-      "recommended_for_ams": ["1.6.0", "1.6.1", "1.6.2"],
-      "notes": "No se recomienda usar esta versión de Hekate con Atmosphère 1.7.0 o superior."
-    }
-  },
+  "schema_version": "2.0",
+  "last_updated": "2025-09-01T10:00:00Z",
   "problem_solutions": {
     "EXFAT_DETECTED": {
-      "description": "Se recomienda respaldar los datos importantes de tu Micro SD y formatearla usando el sistema de archivos FAT32 para máxima estabilidad y prevenir corrupción de datos."
+      "level": "WARNING",
+      "title": "Formato exFAT detectado en la tarjeta SD",
+      "description": "Tu tarjeta usa el formato exFAT, que es propenso a la corrupción de datos. Se recomienda encarecidamente usar FAT32 para máxima estabilidad.",
+      "solution": {
+        "description": "Se recomienda respaldar los datos importantes de tu Micro SD, formatearla usando el sistema de archivos FAT32 y luego restaurar tus datos."
+      }
+    },
+    "ESSENTIAL_FOLDERS_MISSING": {
+      "level": "CRITICAL",
+      "title": "Faltan carpetas esenciales del CFW",
+      "description": "No se encontraron directorios críticos como /atmosphere o /bootloader. Es probable que la SD esté corrupta o no esté preparada para arrancar un CFW.",
+      "solution": {
+        "description": "La estructura de tu SD está incompleta. La mejor solución es realizar una instalación limpia usando el módulo 'Actualización del sistema' de NX Paradox.",
+        "action": "GUIDED_INSTALL",
+        "context": {
+          "target_module": "CFW_UPDATER"
+        }
+      }
+    },
+    "ARCHIVE_BIT_SET": {
+      "level": "CRITICAL",
+      "title": "Atributo de 'Archivo' incorrecto detectado",
+      "description": "Se detectó que muchos archivos tienen el 'bit de archivo' activado, un problema común tras un apagado incorrecto que impide que Atmosphère funcione.",
+      "solution": {
+        "description": "Esta es una reparación sencilla que se hace desde Hekate. Sigue estos pasos:\n1. Inicia en Hekate.\n2. Ve a 'Tools' > 'Arch bit • RCM Touch • Pkg1/2'.\n3. Pulsa sobre 'Fix Archive Bit'.\n4. Reinicia la consola.",
+        "action": "GUIDED_ASSISTANT"
+      }
     },
     "THEME_INCOMPATIBLE": {
+      "level": "CRITICAL",
+      "title": "Tema personalizado incompatible",
       "description": "Tu versión de firmware es incompatible con temas personalizados, lo que puede causar fallos al arrancar. La solución es eliminar la carpeta de temas.",
-      "action": "DELETE_FOLDER",
-      "context_id": "theme_folder_path"
+      "solution": {
+        "description": "Para solucionar el problema de arranque, la aplicación eliminará de forma segura la carpeta que contiene los temas incompatibles.",
+        "action": "DELETE_FOLDER"
+      }
     },
     "SIGPATCHES_MISSING": {
-      "description": "Usa el módulo 'Actualización del sistema' de NX Paradox para reinstalar el pack de CFW más reciente. Esto restaurará los parches correctos y necesarios."
+      "level": "CRITICAL",
+      "title": "Sigpatches no encontrados o corruptos",
+      "description": "Faltan los parches necesarios para tu CFW. Tus juegos y aplicaciones no oficiales no se iniciarán.",
+      "solution": {
+        "description": "Vamos a descargar y reemplazar únicamente los archivos de parches que faltan, sin necesidad de descargar un pack de CFW completo.",
+        "action": "REPLACE_FILES",
+        "context": {
+          "url": "https://github.com/TestPilotX/NX-Paradox-Packs/releases/download/Patches-v1/Sigpatches-1.7.0_FW-18.1.0.zip"
+        }
+      }
     },
     "BROKEN_PATH_INI": {
-      "description": "Edita manualmente el archivo 'bootloader/hekate_ipl.ini' en tu Micro SD y corrige o elimina la línea que apunta al archivo que ya no existe."
+      "level": "WARNING",
+      "title": "Ruta rota en tu configuración de arranque",
+      "description": "Tu archivo 'hekate_ipl.ini' apunta a un payload o archivo de configuración que no existe. Seleccionar esa opción en Hekate causará un error.",
+      "solution": {
+        "description": "Puedes reinstalar tu CFW con nuestro pack verificado para generar un hekate_ipl.ini limpio, o editarlo manualmente para corregir la ruta incorrecta.",
+        "action": "GUIDED_INSTALL",
+        "context": {
+          "target_module": "CFW_UPDATER"
+        }
+      }
     },
-    "CORRUPT_INI_FILE": {
-      "description": "Tu archivo de configuración de Hekate está dañado. Reemplaza 'bootloader/hekate_ipl.ini' con una copia nueva o de una copia de seguridad."
-    },
-    "HEKATE_AMS_MISMATCH": {
-      "description": "Actualiza Hekate a la última versión para asegurar total compatibilidad y acceso a las nuevas funciones de Atmosphère. Puedes hacerlo desde el módulo 'Actualización del sistema'."
-    },
-    "MC_FW_INCOMPATIBLE": {
-      "description": "Tu versión de Mission Control es incompatible y puede causar errores. La solución recomendada para asegurar la estabilidad es eliminarla.",
-      "action": "DELETE_FOLDER"
+    "GENERIC_CRASH_2168_0002": {
+      "level": "CRITICAL",
+      "title": "Crash detectado (Error 2168-0002)",
+      "description": "Se encontró un reporte de error del sistema. Este código de error casi siempre significa que un homebrew o módulo del sistema es incompatible con tu versión de Firmware/Atmosphère.",
+      "solution": {
+        "description": "La causa más común de este error es una desincronización entre versiones. La solución más segura y recomendada es actualizar tu CFW completo con nuestro último pack verificado para asegurar que todos los componentes sean 100% compatibles.",
+        "action": "GUIDED_INSTALL",
+        "context": {
+          "target_module": "CFW_UPDATER",
+          "message": "La mejor solución es actualizar tu CFW con nuestro pack verificado. Te llevaremos al módulo de Actualización con la opción correcta ya seleccionada."
+        }
+      }
     }
   }
 }
